@@ -12,37 +12,45 @@ var url = "http://localhost:8080/myNextProject/public/api/auth/";
 
 // TO-DO: Add expiration to cookie
 export function loginUser({ email, password }) {
-  return function (dispatch) {
-    axios.post(url+"login", { email, password })
-    .then((response) => {
-      cookie.save('token', response.data.token, { path: '/' });
-      cookie.save('user', response.data.user, { path: '/' });
-      dispatch({ type: AUTH_USER });
-      window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
-    })
-    .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
-    });
-  };
+  console.log("email ", email);
+  console.log("password ", password);
+  // return function (dispatch) {
+  //   axios.post(url+"login", { email, password })
+  //   .then((response) => {
+  //     cookie.save('token', response.data.token, { path: '/' });
+  //     cookie.save('user', response.data.user, { path: '/' });
+  //     dispatch({ type: AUTH_USER });
+  //     window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
+  //   })
+  //   .catch((error) => {
+  //     errorHandler(dispatch, error.response, AUTH_ERROR);
+  //   });
+  // };
 }
 
 export function registerUser({ email, firstName, lastName, password }) {
-  return function (dispatch) {
+  console.log("email ", email);
+  console.log("firstName ", firstName);
+  console.log("lastName ", lastName);
+  console.log("password ", password);
+   return function (dispatch) {
 
-    axios.post(url+"signup", { email, firstName, lastName, password })
-    .then((response) => {
-      cookie.save('token', response.data.token, { path: '/' });
-      cookie.save('user', response.data.user, { path: '/' });
+  //   axios.post(url+"signup", { email, firstName, lastName, password })
+  //   .then((response) => {
+      cookie.save('token', "response.data.token", { path: '/' });
+      cookie.save('user', "response.data.user", { path: '/' });
       dispatch({ type: AUTH_USER });
       window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
-    })
-    .catch((error) => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
-    });
+  //   })
+  //   .catch((error) => {
+  //     errorHandler(dispatch, error.response, AUTH_ERROR);
+  //   });
   };
 }
 
 export function logoutUser(error) {
+  console.log("logoutUser ", error);
+
   return function (dispatch) {
     dispatch({ type: UNAUTH_USER, payload: error || '' });
     cookie.remove('token', { path: '/' });
