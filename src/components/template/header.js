@@ -49,6 +49,12 @@ class HeaderTemplate extends Component {
             <div className="collapse navbar-collapse" id="nav-collapse">
               <ul className="nav navbar-nav navbar-right">
                 {this.renderLinks()}
+                <li key={4}>
+                  <Link to="products">Products</Link>
+                </li>,
+                <li key={5}>
+                  <Link to="products/new">New Products</Link>
+                </li>,
               </ul>
             </div>
           </div>

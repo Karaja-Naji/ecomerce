@@ -7,6 +7,12 @@ import NotFoundPage from './components/pages/not-found-page';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
+
+//products
+import ProductsPage from './components/pages/products';
+import ProductForm from './components/products/productForm';
+
+
 // import ContactPage from './components/pages/contact-page';
 // import ComponentSamplesPage from './components/pages/component-samples';
 
@@ -43,6 +49,11 @@ export default (
     <Route path="logout" component={Logout} />
     <Route path="forgot-password" component={ForgotPassword} />
     <Route path="reset-password/:resetToken" component={ResetPassword} />
+
+    //products
+    <Route path="products" component={ProductsPage} />
+
+    <Route path="products/new" component={ProductForm} />
 
 
 
