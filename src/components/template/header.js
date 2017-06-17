@@ -55,6 +55,9 @@ class HeaderTemplate extends Component {
                 <li key={5}>
                   <Link to="products/new">New Products</Link>
                 </li>,
+                <li key={6}>
+                  <Link to="categouries">Categouries</Link>
+                </li>,
               </ul>
             </div>
           </div>

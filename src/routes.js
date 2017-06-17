@@ -12,6 +12,9 @@ import HomePage from './components/pages/home-page';
 import ProductsPage from './components/pages/products';
 import ProductForm from './components/products/productForm';
 
+//categouries
+import CategouriesPage from './components/dashboared/categouries';
+
 
 // import ContactPage from './components/pages/contact-page';
 // import ComponentSamplesPage from './components/pages/component-samples';
@@ -55,6 +58,8 @@ export default (
 
     <Route path="products/new" component={ProductForm} />
 
+
+    <Route path="categouries" component={CategouriesPage} />
 
 
 
