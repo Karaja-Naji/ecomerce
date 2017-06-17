@@ -4,15 +4,29 @@ import FooterTemplate from './template/footer';
 
 class App extends Component {
   render() {
+    const preLoadStyle = {
+      display: 'none'
+    }
     return (
       <div>
-        <HeaderTemplate logo="Your Site" />
+      <div id="pre-loader" class="loader-container" style={preLoadStyle}>
+            <div class="loader">
+               <img src={"./../public/images/svg/rings.svg"} alt="loader" />
+            </div>
+         </div>
 
-        <div className="container main-cont">
+      <div class="w1">
+
+        <HeaderTemplate  />
+
+        
           {this.props.children}
-        </div>
+        
 
         <FooterTemplate />
+      </div>
+
+      <span id="back-top" class="fa fa-arrow-up active"></span>
       </div>
     );
   }

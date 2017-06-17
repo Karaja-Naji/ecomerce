@@ -36,7 +36,7 @@ if (token) {
   store.dispatch({ type: AUTH_USER });
 }
 
-const app = document.getElementById('app');
+const app = document.getElementById('wrapper');
 
 ReactDOM.render(
   <Provider store={store}>

@@ -9,16 +9,18 @@ export default function ProductsList({products}) {
 
   const productList = (
 
-    <p> Products List 
+    <li>
      { products.map( product => <ProductCard key={product.id} product={product} />) }
-
-    </p>
+     </li>
+    
   );
 
   return (
-    <div>
-      {products.lenght === 0 ? emptyMessage : productList}
-    </div>
+    <ul class="mt-productlisthold list-inline">
+      
+      {products.length == 0 ? emptyMessage : productList}
+    
+    </ul>
   );
 }
 
