@@ -18,3 +18,6 @@ Unused devDependencies
 * eslint-plugin-jsx-a11y
 * eslint-plugin-react
 * style-loader
+
+
+https://facebook.github.io/react/docs/thinking-in-react.html

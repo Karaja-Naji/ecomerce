@@ -4,7 +4,7 @@ export default function ProductCard({product}) {
   
 
   return (
-	             
+	     <li>
                   <div class="mt-product1 large">
                      <div class="box">
                         <div class="b1">
@@ -26,10 +26,11 @@ export default function ProductCard({product}) {
                      </div>
                      <div class="txt">
                         <strong class="title"><a href="product-detail.html">Bombi Chair</a></strong>
-                        <span class="price"><i class="fa fa-eur"></i> <span>399,00</span></span>
+                        <span class="price"><i class="fa fa-eur"></i> <span>{product.price}</span></span>
                      </div>
                      
                   </div>
+                 </li>
                  
               
   );

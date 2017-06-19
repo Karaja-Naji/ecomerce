@@ -6,12 +6,63 @@ import { fetchProducts } from "./../../actions/productsAction"
 import PagesHeader from "./../template/pagesHeader"
 
 class ProductsPage extends Component {
+	constructor(){
+		super();
+
+		this.state = {
+			currentPage:1,
+			productsPerPage:3
+		}
+		this.handlePagination = this.handlePagination.bind(this);
+	}
+
+	  handlePagination(event) {
+	    this.setState({
+	      currentPage: Number(event.target.id)
+	    });
+	  }
+
 	componentDidMount(){
 		console.log("componentDidMount");
 		this.props.fetchProducts();
 
 	}
   render() {
+
+     const { currentPage, productsPerPage } = this.state;
+
+     const {products} = this.props;
+
+    // Logic for displaying todos
+    const indexOfLastTodo = currentPage * productsPerPage;
+    const indexOfFirstTodo = indexOfLastTodo - productsPerPage;
+    const activeProducts = products.slice(indexOfFirstTodo, indexOfLastTodo);
+
+    console.log("activeProducts", activeProducts);
+
+    const pageNumbers = [];
+
+	for (var i =1; i <= Math.ceil(products.length / 3) ;  i++) {
+		pageNumbers.push(i) 
+	}
+
+	console.log("pageNumbers", pageNumbers);
+	console.log("categouries xx ", this.props.categouries);
+
+    const pagination = (
+    	<nav class="mt-pagination">
+    	    <ul class="list-inline">
+    	    	{ pageNumbers.map( number => {
+    	    		return (
+				<li key={number} ><a onClick={this.handlePagination} id={number}>{number} </a></li>
+    	    			)
+    	    		}
+
+    	    	)}
+    	    </ul>
+	</nav>
+    )
+
     return (
     	<main id="mt-main">
 
@@ -19,7 +70,8 @@ class ProductsPage extends Component {
 
     		<div class="container">
     			<div class="row">
-	    			<ProductSidebar />
+
+	    			<ProductSidebar categouries={this.props.categouries} />
 
 				<div class="col-xs-12 col-sm-8 col-md-9 wow fadeInRight" data-wow-delay="0.4s">
 
@@ -51,19 +103,12 @@ class ProductsPage extends Component {
 			                           </div>
 			                        
 			                       </header>	
-					<h1>Productsxx.</h1>
+				
 
-					<ProductList products={this.props.products}/>
+					<ProductList products={activeProducts} />
 
+					{pagination}
 
-					<nav class="mt-pagination">
-			                           <ul class="list-inline">
-			                              <li><a href="#">1</a></li>
-			                              <li><a href="#">2</a></li>
-			                              <li><a href="#">3</a></li>
-			                              <li><a href="#">4</a></li>
-			                           </ul>
-			                      </nav>
 				</div>
     			</div>
     		</div>
@@ -76,12 +121,14 @@ class ProductsPage extends Component {
 
 ProductsPage.propTypes = {
 	products: React.PropTypes.array.isRequired,
+	categouries: React.PropTypes.array.isRequired,
 	fetchProducts : React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){
 	return{
-		products : state.products
+		products : state.products,
+		categouries : state.categouries
 	}
 }
 

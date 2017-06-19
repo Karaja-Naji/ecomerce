@@ -7,20 +7,20 @@ export default function ProductsList({products}) {
     <p>There is no Products </p>
     );
 
-  const productList = (
+  // const productList = (
 
-    <li>
-     { products.map( product => <ProductCard key={product.id} product={product} />) }
-     </li>
     
-  );
+  //    { products.map( product => <ProductCard key={product.id} product={product} />) }
+     
+    
+  // );
 
   return (
-    <ul class="mt-productlisthold list-inline">
-      
-      {products.length == 0 ? emptyMessage : productList}
     
+      <ul class="mt-productlisthold list-inline">
+       {products.length == 0 ? emptyMessage :  products.map( product => <ProductCard key={product.id} product={product} />)}
     </ul>
+   
   );
 }
 

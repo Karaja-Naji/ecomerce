@@ -5,7 +5,7 @@ var url = "http://localhost:8080/myNextProject/public/api/category";
 
 export function fetchCategouries() {
 	return dispatch => {
-	console.log("fetchCategouries xx ");
+	console.log("fetchCategouries xxx ");
 	axios.get(url)
 	    .then((response) => {
 	    	console.log(response);

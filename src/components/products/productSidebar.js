@@ -3,6 +3,22 @@ import React, {Component } from "react"
 class ProductSidebar extends Component {
 
      render(){
+     	const {categouries} = this.props;
+     	console.log("categouries sidebar ", categouries);
+     	const categouriesList = (
+     		<ul class="list-unstyled category-list">
+     		{ categouries.map(category => {
+     			return (
+     				        <li key={category.id}>
+		                                 <a href="#">
+		                                 <span class="name">{category.title}</span>
+		                                 <span class="num">12</span>
+		                                 </a>
+		                              </li>
+     				)
+     		} ) }
+     		</ul>
+     		)
 	return (
 	    <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-3 wow fadeInLeft" data-wow-delay="0.4s">
 
@@ -17,42 +33,7 @@ class ProductSidebar extends Component {
                                  <span class="num">12</span>
                                  </a>
                               </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">SOFAS</span>
-                                 <span class="num">24</span>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">ARMCHAIRS</span>
-                                 <span class="num">9</span>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">BEDROOM</span>
-                                 <span class="num">2</span>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">LIGHTING</span>
-                                 <span class="num">17</span>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">KITCHEN</span>
-                                 <span class="num">10</span>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <span class="name">ACCESSORIES</span>
-                                 <span class="num">23</span>
-                                 </a>
-                              </li>
+                              {categouriesList}
                            </ul>
                          
                         </section>
@@ -60,6 +41,10 @@ class ProductSidebar extends Component {
 	    </aside>
 		)
      }
+}
+
+ProductSidebar.propTypes = {
+  categouries : React.PropTypes.array.isRequired
 }
 
 export default ProductSidebar ;
