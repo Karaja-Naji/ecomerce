@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import ProductList from "./../products/ProductsList"
 import ProductSidebar from "./../products/productSidebar"
+import ProductHeader from "./../products/productHeader"
+import Pagination from "./../products/Pagination"
 import { fetchProducts } from "./../../actions/productsAction"
 import PagesHeader from "./../template/pagesHeader"
 
@@ -11,9 +13,11 @@ class ProductsPage extends Component {
 
 		this.state = {
 			currentPage:1,
-			productsPerPage:3
+			productsPerPage:3,
+			selectedCategoryId:0 
 		}
 		this.handlePagination = this.handlePagination.bind(this);
+		this.changeCategory = this.changeCategory.bind(this);
 	}
 
 	  handlePagination(event) {
@@ -22,46 +26,33 @@ class ProductsPage extends Component {
 	    });
 	  }
 
+	  changeCategory (categoryId){
+	  	this.setState({
+	  		selectedCategoryId:categoryId
+	  	})
+
+	  	console.log("categoryId ", categoryId);
+	  }
+
 	componentDidMount(){
 		console.log("componentDidMount");
 		this.props.fetchProducts();
 
 	}
+
+	handleProductLength(productL){
+		console.log("handleProductLength", productL);
+	}
   render() {
 
-     const { currentPage, productsPerPage } = this.state;
+     const { currentPage, productsPerPage, selectedCategoryId } = this.state;
 
      const {products} = this.props;
 
-    // Logic for displaying todos
-    const indexOfLastTodo = currentPage * productsPerPage;
-    const indexOfFirstTodo = indexOfLastTodo - productsPerPage;
-    const activeProducts = products.slice(indexOfFirstTodo, indexOfLastTodo);
 
-    console.log("activeProducts", activeProducts);
+     //if statment with selectedcategoryid
+     const productLength = products.length ;
 
-    const pageNumbers = [];
-
-	for (var i =1; i <= Math.ceil(products.length / 3) ;  i++) {
-		pageNumbers.push(i) 
-	}
-
-	console.log("pageNumbers", pageNumbers);
-	console.log("categouries xx ", this.props.categouries);
-
-    const pagination = (
-    	<nav class="mt-pagination">
-    	    <ul class="list-inline">
-    	    	{ pageNumbers.map( number => {
-    	    		return (
-				<li key={number} ><a onClick={this.handlePagination} id={number}>{number} </a></li>
-    	    			)
-    	    		}
-
-    	    	)}
-    	    </ul>
-	</nav>
-    )
 
     return (
     	<main id="mt-main">
@@ -71,43 +62,24 @@ class ProductsPage extends Component {
     		<div class="container">
     			<div class="row">
 
-	    			<ProductSidebar categouries={this.props.categouries} />
+	    			<ProductSidebar changeCategory={this.changeCategory} selectedCategoryId={selectedCategoryId} categouries={this.props.categouries} />
 
 				<div class="col-xs-12 col-sm-8 col-md-9 wow fadeInRight" data-wow-delay="0.4s">
 
-					<header class="mt-shoplist-header">
-			                           
-			                           <div class="btn-box">
-			                              <ul class="list-inline">
-			                                 <li>
-			                                    <a href="#" class="drop-link">
-			                                    Default Sorting <i aria-hidden="true" class="fa fa-angle-down"></i>
-			                                    </a>
-			                                    <div class="drop">
-			                                       <ul class="list-unstyled">
-			                                          <li><a href="#">ASC</a></li>
-			                                          <li><a href="#">DSC</a></li>
-			                                          <li><a href="#">Price</a></li>
-			                                          <li><a href="#">Relevance</a></li>
-			                                       </ul>
-			                                    </div>
-			                                 </li>
-			                                 <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
-			                                 <li><a class="mt-viewswitcher" href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
-			                              </ul>
-			                           </div>
-		
-			                           <div class="mt-textbox">
-			                              <p>Showing  <strong>1–9</strong> of  <strong>65</strong> results</p>
-			                              <p>View   <a href="#">9</a> / <a href="#">18</a> / <a href="#">27</a> / <a href="#">All</a></p>
-			                           </div>
-			                        
-			                       </header>	
+
+					<ProductHeader />
+						
 				
 
-					<ProductList products={activeProducts} />
+					<ProductList 
+						selectedCategoryId={selectedCategoryId} 
+						products={products} 
+						currentPage= {currentPage}
+						productsPerPage= {productsPerPage}
+						handleProductLength = {this.handleProductLength}
+					/>
 
-					{pagination}
+					<Pagination productLength={productLength} handlePagination={this.handlePagination} />
 
 				</div>
     			</div>

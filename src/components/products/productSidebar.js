@@ -2,17 +2,23 @@ import React, {Component } from "react"
 
 class ProductSidebar extends Component {
 
+
+     handleCategories(category){
+     	
+     	this.props.changeCategory(category);
+     }
+
      render(){
-     	const {categouries} = this.props;
+     	const { categouries, selectedCategoryId } = this.props;
      	console.log("categouries sidebar ", categouries);
      	const categouriesList = (
      		<ul class="list-unstyled category-list">
      		{ categouries.map(category => {
      			return (
-     				        <li key={category.id}>
-		                                 <a href="#">
-		                                 <span class="name">{category.title}</span>
-		                                 <span class="num">12</span>
+     				<li key={category.id}>
+		                                 <a href="javascript:void(0)" id={category.id} onClick={() => this.handleCategories(category.id)}>
+		                                 	<span class="name">{category.title}</span>
+		                                 	<span class="num">12</span>
 		                                 </a>
 		                              </li>
      				)
@@ -28,8 +34,8 @@ class ProductSidebar extends Component {
                            
                            <ul class="list-unstyled category-list">
                               <li>
-                                 <a href="#">
-                                 <span class="name">CHAIRS</span>
+                                 <a href="javascript:void(0)" onClick={() => this.handleCategories(0)}>
+                                 <span class="name">ALL</span>
                                  <span class="num">12</span>
                                  </a>
                               </li>
